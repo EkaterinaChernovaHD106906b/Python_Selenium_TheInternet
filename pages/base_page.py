@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -33,3 +34,16 @@ class BasePage:
 
     def alert_is_present(self, timeout=5):
         return wait(self.driver, timeout).until(EC.alert_is_present())
+
+    def action_drag_and_drop(self, x, y):
+        action = ActionChains(self.driver)
+        action.drag_and_drop(x, y)
+        action.perform()
+
+    def move_to_element(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
+
+
+

@@ -7,6 +7,8 @@ from pages.basic_auth_page import BasicAuthorizationPage
 from pages.checkboxes_page import CheckboxesPage
 from pages.context_menu_page import ContextMenuPage
 from pages.disappearing_elements_page import DisappearingElementsPage
+from pages.drag_drop_page import DragDropPage
+from pages.dropdown_page import DropDownPage
 
 
 class TestPages:
@@ -60,3 +62,14 @@ class TestPages:
             dis_elements_page.click_different_button('gallery')
             time.sleep(5)
 
+        def test_drag_drop(self, driver):
+            drag_drop_page = DragDropPage(driver, 'https://the-internet.herokuapp.com/drag_and_drop')
+            drag_drop_page.open()
+            drag_drop_page.check_ab_haaders()
+            time.sleep(5)
+
+        def test_dropdown_list(self, driver):
+            dropdown_page = DropDownPage(driver, 'https://the-internet.herokuapp.com/dropdown')
+            dropdown_page.open()
+            dropdown_page.check_options()
+            time.sleep(5)
