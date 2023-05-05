@@ -9,6 +9,7 @@ from pages.context_menu_page import ContextMenuPage
 from pages.disappearing_elements_page import DisappearingElementsPage
 from pages.drag_drop_page import DragDropPage
 from pages.dropdown_page import DropDownPage
+from pages.dynamic_loading_page import DynamicLoadingPage
 
 
 class TestPages:
@@ -73,3 +74,10 @@ class TestPages:
             dropdown_page.open()
             dropdown_page.check_options()
             time.sleep(5)
+
+        def test_loading_page(self, driver):
+            loading_page = DynamicLoadingPage(driver, 'https://the-internet.herokuapp.com/dynamic_loading')
+            loading_page.open()
+            text = loading_page.check_first_href('second')
+            assert text == 'Hello World!'
+

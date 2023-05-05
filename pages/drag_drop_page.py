@@ -13,6 +13,7 @@ class DragDropPage(BasePage):
     def check_ab_haaders(self):
         a = self.element_is_visible(self.A)
         b = self.element_is_visible(self.B)
+        self.move_to_element(a)
         self.action_drag_and_drop(a, b)
         text = self.element_is_present(self.A_HEADER).text
         print(text)
