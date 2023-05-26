@@ -10,6 +10,7 @@ from pages.disappearing_elements_page import DisappearingElementsPage
 from pages.drag_drop_page import DragDropPage
 from pages.dropdown_page import DropDownPage
 from pages.dynamic_loading_page import DynamicLoadingPage
+from pages.modal_window_page import ModalWindowPage
 
 
 class TestPages:
@@ -80,4 +81,12 @@ class TestPages:
             loading_page.open()
             text = loading_page.check_first_href('second')
             assert text == 'Hello World!'
+
+        def test_modal_window(self, driver):
+            modal_window_page = ModalWindowPage(driver, 'https://the-internet.herokuapp.com/entry_ad')
+            modal_window_page.open()
+            text_modal_window = modal_window_page.close_modal_window()
+            time.sleep(5)
+            assert text_modal_window == "It's commonly used to encourage a user to take an action (e.g., give their e-mail address to sign up for something or disable their ad blocker)."
+
 
