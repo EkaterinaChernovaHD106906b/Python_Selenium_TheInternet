@@ -10,6 +10,7 @@ from pages.disappearing_elements_page import DisappearingElementsPage
 from pages.drag_drop_page import DragDropPage
 from pages.dropdown_page import DropDownPage
 from pages.dynamic_loading_page import DynamicLoadingPage
+from pages.file_downloader_page import FileDownLoaderPage
 from pages.modal_window_page import ModalWindowPage
 
 
@@ -89,4 +90,13 @@ class TestPages:
             time.sleep(5)
             assert text_modal_window == "It's commonly used to encourage a user to take an action (e.g., give their e-mail address to sign up for something or disable their ad blocker)."
 
+        def test_file_downloader(self, driver):
+            file_downloader_page = FileDownLoaderPage(driver, 'https://the-internet.herokuapp.com/download')
+            file_downloader_page.open()
+            file_downloader_page.download_file()
 
+        def test_upload_file(self, driver):
+            upload_file_page = FileDownLoaderPage(driver, 'https://the-internet.herokuapp.com/upload')
+            upload_file_page.open()
+            upload_file_page.upload_file()
+            time.sleep(5)

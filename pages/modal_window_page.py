@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -13,3 +14,6 @@ class ModalWindowPage(BasePage):
         text_modal_window = self.element_is_visible(self.TEXT).text
         self.element_is_visible(self.CLOSE).click()
         return text_modal_window
+
+
+
