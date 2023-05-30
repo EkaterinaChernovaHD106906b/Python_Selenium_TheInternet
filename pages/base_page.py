@@ -45,5 +45,11 @@ class BasePage:
         action.move_to_element(element)
         action.perform()
 
+    def scroll_by(self, scroll_value):
+        scroll_by = f'window.scrollBy(0, {scroll_value});'
+        self.driver.execute_script(scroll_by)
+
+
+
 
 

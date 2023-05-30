@@ -11,6 +11,9 @@ from pages.drag_drop_page import DragDropPage
 from pages.dropdown_page import DropDownPage
 from pages.dynamic_loading_page import DynamicLoadingPage
 from pages.file_downloader_page import FileDownLoaderPage
+from pages.floating_menu_page import FloatingMenuPage
+from pages.forgot_password_page import ForgotPasswordPage
+from pages.login_page import LoginPage
 from pages.modal_window_page import ModalWindowPage
 
 
@@ -100,3 +103,31 @@ class TestPages:
             upload_file_page.open()
             upload_file_page.upload_file()
             time.sleep(5)
+
+        def test_floating_menu(self, driver):
+            floating_menu = FloatingMenuPage(driver, 'https://the-internet.herokuapp.com/floating_menu')
+            floating_menu.open()
+            floating_menu.check_floating_menu()
+            time.sleep(5)
+
+        def test_forgot_password(self, driver):
+            forgot_password_page = ForgotPasswordPage(driver, 'https://the-internet.herokuapp.com/forgot_password')
+            forgot_password_page.open()
+            result = forgot_password_page.retrieve_password()
+            time.sleep(5)
+            assert result == 'Internal Server Error'
+
+        def test_login_success(self, driver):
+            login_page = LoginPage(driver, 'https://the-internet.herokuapp.com/login')
+            login_page.open()
+            result = login_page.login_success()
+            time.sleep(5)
+            assert result.replace('×', '').replace('\n', '') == 'You logged into a secure area!'
+
+        def test_login_unsuccessful(self, driver):
+            login_page = LoginPage(driver, 'https://the-internet.herokuapp.com/login')
+            login_page.open()
+            result = login_page.login_unsuccessful()
+            time.sleep(5)
+            assert result.replace('×', '').replace('\n', '') == 'Your username is invalid!'
+
