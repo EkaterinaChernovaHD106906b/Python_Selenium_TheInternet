@@ -1,3 +1,4 @@
+import random
 import time
 
 from pages.ab_page import ABPage
@@ -13,6 +14,7 @@ from pages.dynamic_loading_page import DynamicLoadingPage
 from pages.file_downloader_page import FileDownLoaderPage
 from pages.floating_menu_page import FloatingMenuPage
 from pages.forgot_password_page import ForgotPasswordPage
+from pages.iframe import IFramePage
 from pages.login_page import LoginPage
 from pages.modal_window_page import ModalWindowPage
 
@@ -130,4 +132,12 @@ class TestPages:
             result = login_page.login_unsuccessful()
             time.sleep(5)
             assert result.replace('×', '').replace('\n', '') == 'Your username is invalid!'
+
+        def test_iframe(self, driver):
+            iframe_page = IFramePage(driver, 'https://the-internet.herokuapp.com/iframe')
+            iframe_page.open()
+            text = f'My text {random.randint(0, 100)}'
+            my_text = iframe_page.input_text(f'{text}')
+            time.sleep(5)
+            assert my_text == text
 
