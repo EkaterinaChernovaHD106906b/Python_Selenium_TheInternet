@@ -17,6 +17,7 @@ from pages.forgot_password_page import ForgotPasswordPage
 from pages.iframe import IFramePage
 from pages.login_page import LoginPage
 from pages.modal_window_page import ModalWindowPage
+from pages.notification_message_page import NotificationMessagePage
 
 
 class TestPages:
@@ -140,4 +141,10 @@ class TestPages:
             my_text = iframe_page.input_text(f'{text}')
             time.sleep(5)
             assert my_text == text
+
+        def test_notification_message(self, driver):
+            notification_message_page = NotificationMessagePage(driver, 'https://the-internet.herokuapp.com/notification_message_rendered')
+            notification_message_page.open()
+            notification_message_page.check_notification_message()
+            time.sleep(5)
 
