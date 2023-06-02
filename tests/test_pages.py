@@ -3,6 +3,7 @@ import time
 
 from pages.ab_page import ABPage
 from pages.add_remove_page import AddRemoveElements
+from pages.alert_page import AlertPage
 from pages.base_page import BasePage
 from pages.basic_auth_page import BasicAuthorizationPage
 from pages.checkboxes_page import CheckboxesPage
@@ -18,6 +19,7 @@ from pages.forgot_password_page import ForgotPasswordPage
 from pages.hovers_page import HoversPage
 from pages.iframe import IFramePage
 from pages.jquery_page import JQueryPage
+from pages.key_presses_page import KeyPressesPage
 from pages.login_page import LoginPage
 from pages.modal_window_page import ModalWindowPage
 from pages.notification_message_page import NotificationMessagePage
@@ -166,3 +168,21 @@ class TestPages:
             check_file_exists = jquery_page.use_jquery()
             time.sleep(5)
             assert check_file_exists == True
+
+        def test_alerts_page(self, driver):
+            alerts_page = AlertPage(driver, 'https://the-internet.herokuapp.com/javascript_alerts')
+            alerts_page.open()
+            alerts_page.work_with_alerts()
+            time.sleep(5)
+
+        def test_key_presses(self, driver):
+            key_presses_page = KeyPressesPage(driver, 'https://the-internet.herokuapp.com/key_presses')
+            key_presses_page.open()
+            input_keys = key_presses_page.input_keys()
+            time.sleep(5)
+            assert input_keys[0] == 'You entered: U'
+            assert input_keys[1] == 'You entered: S'
+            assert input_keys[2] == 'You entered: E'
+            assert input_keys[3] == 'You entered: R'
+
+
