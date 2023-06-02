@@ -23,6 +23,7 @@ from pages.key_presses_page import KeyPressesPage
 from pages.login_page import LoginPage
 from pages.modal_window_page import ModalWindowPage
 from pages.notification_message_page import NotificationMessagePage
+from pages.windows_page import WindowsPage
 
 
 class TestPages:
@@ -184,5 +185,15 @@ class TestPages:
             assert input_keys[1] == 'You entered: S'
             assert input_keys[2] == 'You entered: E'
             assert input_keys[3] == 'You entered: R'
+
+        def test_windows_page(self, driver):
+            windows_page = WindowsPage(driver, 'https://the-internet.herokuapp.com/windows')
+            windows_page.open()
+            text = windows_page.open_new_window()
+            time.sleep(5)
+            assert text == 'New Window'
+
+
+
 
 
