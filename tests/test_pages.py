@@ -23,6 +23,7 @@ from pages.key_presses_page import KeyPressesPage
 from pages.login_page import LoginPage
 from pages.modal_window_page import ModalWindowPage
 from pages.notification_message_page import NotificationMessagePage
+from pages.status_code_page import StatusCodePage
 from pages.windows_page import WindowsPage
 
 
@@ -192,6 +193,12 @@ class TestPages:
             text = windows_page.open_new_window()
             time.sleep(5)
             assert text == 'New Window'
+
+        def test_status_code(self, driver):
+            status_code_page = StatusCodePage(driver, 'https://the-internet.herokuapp.com/status_codes')
+            status_code_page.open()
+            status_code = status_code_page.get_status_code('500')
+            assert status_code == '500'
 
 
 
