@@ -14,7 +14,10 @@ from pages.dynamic_loading_page import DynamicLoadingPage
 from pages.file_downloader_page import FileDownLoaderPage
 from pages.floating_menu_page import FloatingMenuPage
 from pages.forgot_password_page import ForgotPasswordPage
+
+from pages.hovers_page import HoversPage
 from pages.iframe import IFramePage
+from pages.jquery_page import JQueryPage
 from pages.login_page import LoginPage
 from pages.modal_window_page import ModalWindowPage
 from pages.notification_message_page import NotificationMessagePage
@@ -143,8 +146,23 @@ class TestPages:
             assert my_text == text
 
         def test_notification_message(self, driver):
-            notification_message_page = NotificationMessagePage(driver, 'https://the-internet.herokuapp.com/notification_message_rendered')
+            notification_message_page = NotificationMessagePage(driver,
+                                                                'https://the-internet.herokuapp.com/notification_message_rendered')
             notification_message_page.open()
             notification_message_page.check_notification_message()
             time.sleep(5)
 
+        def test_hovers(self, driver):
+            hovers_page = HoversPage(driver, 'https://the-internet.herokuapp.com/hovers')
+            hovers_page.open()
+            user = 'user3'
+            user_info = hovers_page.get_user_info(user)
+            time.sleep(5)
+            assert user_info == f'name: {user}'
+
+        def test_jquery(self, driver):
+            jquery_page = JQueryPage(driver, 'https://the-internet.herokuapp.com/jqueryui/menu#')
+            jquery_page.open()
+            check_file_exists = jquery_page.use_jquery()
+            time.sleep(5)
+            assert check_file_exists == True
