@@ -23,6 +23,7 @@ from pages.key_presses_page import KeyPressesPage
 from pages.login_page import LoginPage
 from pages.modal_window_page import ModalWindowPage
 from pages.notification_message_page import NotificationMessagePage
+from pages.shifting_content_page import ShiftingContentPage
 from pages.status_code_page import StatusCodePage
 from pages.windows_page import WindowsPage
 
@@ -53,6 +54,7 @@ class TestPages:
             base_auth_page = BasicAuthorizationPage(driver, 'https://admin:admin@the-internet.herokuapp.com/basic_auth')
             base_auth_page.open()
             check = base_auth_page.check_basic_auto()
+            time.sleep(5)
             success_auth = 'Congratulations! You must have the proper credentials.'
             assert check == success_auth, 'Authentication failed'
 
@@ -200,7 +202,26 @@ class TestPages:
             status_code = status_code_page.get_status_code('500')
             assert status_code == '500'
 
+        def test_shifting_content_page_menu(self,driver):
+            shifting_content_page = ShiftingContentPage(driver, 'https://the-internet.herokuapp.com/shifting_content')
+            shifting_content_page.open()
+            position_before, position_after = shifting_content_page.use_shifting_content_menu()
+            time.sleep(5)
+            assert position_before != position_after
 
+        def test_shifting_content_page_menu_image_position(self,driver):
+            shifting_content_page = ShiftingContentPage(driver, 'https://the-internet.herokuapp.com/shifting_content')
+            shifting_content_page.open()
+            position_before, position_after = shifting_content_page.use_shifting_content_image_position()
+            time.sleep(5)
+            assert position_before != position_after
+
+        def test_shifting_content_page_menu_image_link(self,driver):
+            shifting_content_page = ShiftingContentPage(driver, 'https://the-internet.herokuapp.com/shifting_content')
+            shifting_content_page.open()
+            src_before, src_after = shifting_content_page.use_shifting_content_image_link()
+            time.sleep(5)
+            assert src_before != src_after
 
 
 
