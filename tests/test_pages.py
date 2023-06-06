@@ -202,26 +202,36 @@ class TestPages:
             status_code = status_code_page.get_status_code('500')
             assert status_code == '500'
 
-        def test_shifting_content_page_menu(self,driver):
+        def test_shifting_content_page_menu(self, driver):
             shifting_content_page = ShiftingContentPage(driver, 'https://the-internet.herokuapp.com/shifting_content')
             shifting_content_page.open()
             position_before, position_after = shifting_content_page.use_shifting_content_menu()
             time.sleep(5)
             assert position_before != position_after
 
-        def test_shifting_content_page_menu_image_position(self,driver):
+        def test_shifting_content_page_image_position(self, driver):
             shifting_content_page = ShiftingContentPage(driver, 'https://the-internet.herokuapp.com/shifting_content')
             shifting_content_page.open()
             position_before, position_after = shifting_content_page.use_shifting_content_image_position()
             time.sleep(5)
             assert position_before != position_after
 
-        def test_shifting_content_page_menu_image_link(self,driver):
+        def test_shifting_content_page_image_link(self, driver):
             shifting_content_page = ShiftingContentPage(driver, 'https://the-internet.herokuapp.com/shifting_content')
             shifting_content_page.open()
             src_before, src_after = shifting_content_page.use_shifting_content_image_link()
             time.sleep(5)
             assert src_before != src_after
+
+        def test_shifting_content_page_list(self, driver):
+            shifting_content_page = ShiftingContentPage(driver, 'https://the-internet.herokuapp.com/shifting_content/list')
+            shifting_content_page.open()
+            text_before, text_after = shifting_content_page.use_shifting_content_list()
+            time.sleep(5)
+            assert text_before != text_after
+
+
+
 
 
 

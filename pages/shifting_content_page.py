@@ -28,6 +28,10 @@ class ShiftingContentPage(BasePage):
     FOURTH_LINK_IMG = (By.XPATH, '//div[@class="example"]//p[5]//a')
     IMAGE = (By.CSS_SELECTOR, 'img.shift')
 
+    # List
+
+    TEXT = (By.XPATH, '//div[@id="content"]//div[@class="large-6 columns large-centered"]')
+
     def use_shifting_content_menu(self):
         self.element_is_visible(self.MENU_ELEMENT).click()
         first_link = self.element_is_present(self.FIRST_LINK)
@@ -62,6 +66,14 @@ class ShiftingContentPage(BasePage):
         image_after = self.element_is_present(self.IMAGE)
         src_after = image_after.get_attribute('src')
         return src_before, src_after
+
+    def use_shifting_content_list(self):
+        text_before = self.element_is_present(self.TEXT).text
+        self.driver.refresh()
+        text_after = self.element_is_present(self.TEXT).text
+        return text_before, text_after
+
+
 
 
 
