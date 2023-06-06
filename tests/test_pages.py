@@ -25,6 +25,7 @@ from pages.modal_window_page import ModalWindowPage
 from pages.notification_message_page import NotificationMessagePage
 from pages.shifting_content_page import ShiftingContentPage
 from pages.status_code_page import StatusCodePage
+from pages.typos_page import TyposPage
 from pages.windows_page import WindowsPage
 
 
@@ -229,6 +230,12 @@ class TestPages:
             text_before, text_after = shifting_content_page.use_shifting_content_list()
             time.sleep(5)
             assert text_before != text_after
+
+        def test_typos_page(self, driver):
+            typos_page = TyposPage(driver, 'https://the-internet.herokuapp.com/typos')
+            typos_page.open()
+            typo, typo2 = typos_page.check_typo()
+            assert typo != typo2
 
 
 
